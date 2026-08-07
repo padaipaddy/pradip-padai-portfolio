@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pradip Padai — RPO Operations Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1F4E79;
+    --navy-mid:#2A6099;
+    --slate:   #1A2A3A;
+    --ink:     #1A1A2E;
+    --gold:    #C9A84C;
+    --gold-lt: #E8C97A;
+    --off-white:#F7F5F0;
+    --muted:   #8A9BB0;
+    --card-bg: #FFFFFF;
+    --border:  #E2E8F0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(31,78,121,0.96);
+    backdrop-filter: blur(10px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: #fff; letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-lt); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--slate) 0%, var(--navy) 60%, #2A6099 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 100px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-content { max-width: 800px; text-align: center; position: relative; }
+  .hero-eyebrow {
+    font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: #fff; line-height: 1.05; margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255,255,255,0.7); margin-bottom: 2rem;
+    font-weight: 300; letter-spacing: 0.02em;
+  }
+  .hero-divider {
+    width: 60px; height: 2px; background: var(--gold);
+    margin: 0 auto 2rem; border-radius: 2px;
+  }
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(255,255,255,0.85);
+    max-width: 600px; margin: 0 auto 3rem;
+    font-style: italic; line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  }
+  .btn {
+    padding: 0.85rem 2rem; border-radius: 4px; font-size: 0.9rem;
+    font-weight: 600; letter-spacing: 0.05em; text-decoration: none;
+    transition: all 0.25s; cursor: pointer; border: none;
+  }
+  .btn-gold { background: var(--gold); color: var(--slate); }
+  .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); }
+  .btn-outline:hover { border-color: var(--gold-lt); color: var(--gold-lt); transform: translateY(-2px); }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+  }
+  .stats-grid {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; color: var(--gold); font-weight: 700; display: block;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: rgba(255,255,255,0.65);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--navy); margin-bottom: 1rem; line-height: 1.2;
+  }
+  .section-line {
+    width: 40px; height: 2px; background: var(--gold);
+    margin-bottom: 2.5rem; border-radius: 2px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .about-text p {
+    color: #444; line-height: 1.9; margin-bottom: 1.2rem; font-size: 0.97rem;
+  }
+  .about-text p strong { color: var(--navy); }
+  .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .about-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-left: 3px solid var(--gold); border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+  }
+  .about-card-title { font-weight: 600; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .about-card-text { font-size: 0.85rem; color: #666; line-height: 1.6; }
+
+  /* ── EXPERIENCE ── */
+  .exp-bg { background: var(--card-bg); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 16px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .exp-item {
+    position: relative; padding-left: 3.5rem; margin-bottom: 2.5rem;
+  }
+  .exp-dot {
+    position: absolute; left: 8px; top: 4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--navy); border: 3px solid var(--gold);
+  }
+  .exp-current .exp-dot { background: var(--gold); }
+  .exp-meta {
+    font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .exp-role {
+    font-weight: 600; color: var(--navy); font-size: 1rem; margin-bottom: 0.15rem;
+  }
+  .exp-company { color: var(--gold); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.75rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.88rem; color: #555; line-height: 1.7; padding-left: 1rem;
+    position: relative; margin-bottom: 0.35rem;
+  }
+  .exp-bullets li::before {
+    content: '–'; position: absolute; left: 0; color: var(--gold);
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { box-shadow: 0 8px 24px rgba(31,78,121,0.1); transform: translateY(-3px); }
+  .skill-card-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  .skill-card-title { font-weight: 600; color: var(--navy); margin-bottom: 0.75rem; font-size: 0.95rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    background: #EEF4FB; color: var(--navy-mid);
+    font-size: 0.75rem; padding: 0.25rem 0.6rem;
+    border-radius: 20px; font-weight: 500;
+  }
+
+  /* ── SECTORS ── */
+  .sectors-bg { background: var(--navy); }
+  .sectors-bg .section-title { color: #fff; }
+  .sectors-bg .section-label { color: var(--gold-lt); }
+  .sectors-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .sector-pill {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px; padding: 1rem 1.2rem;
+    color: rgba(255,255,255,0.85); font-size: 0.88rem; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .sector-pill:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold-lt); }
+  .sector-pill span { display: block; font-size: 1.2rem; margin-bottom: 0.4rem; }
+
+  /* ── LANGUAGES ── */
+  .lang-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .lang-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem 2rem; text-align: center; flex: 1; min-width: 160px;
+  }
+  .lang-flag { font-size: 2rem; margin-bottom: 0.5rem; }
+  .lang-name { font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+  .lang-level { font-size: 0.8rem; color: var(--muted); }
+  .lang-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 0.75rem; }
+  .lang-fill { height: 100%; background: var(--gold); border-radius: 2px; }
+
+  /* ── CONTACT ── */
+  .contact-bg { background: var(--slate); }
+  .contact-bg .section-title { color: #fff; }
+  .contact-bg .section-label { color: var(--gold-lt); }
+  .contact-bg .section-line { background: var(--gold); }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem; margin-bottom: 3rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 1.5rem; text-align: center;
+    transition: all 0.2s;
+  }
+  .contact-card:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+  .contact-card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .contact-card-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .contact-card-value { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; word-break: break-all; }
+  .contact-card a { color: inherit; text-decoration: none; }
+  .contact-card a:hover { color: var(--gold-lt); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 1.5rem 2rem; text-align: center;
+    font-size: 0.8rem; color: rgba(255,255,255,0.35);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero-name    { animation: fadeUp 0.6s 0.15s ease both; }
+    .hero-title   { animation: fadeUp 0.6s 0.25s ease both; }
+    .hero-divider { animation: fadeUp 0.6s 0.35s ease both; }
+    .hero-tagline { animation: fadeUp 0.6s 0.45s ease both; }
+    .hero-cta     { animation: fadeUp 0.6s 0.55s ease both; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pradip Padai</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">RPO Operations Specialist · Ahmedabad, India</p>
+    <h1 class="hero-name">Pradip Padai</h1>
+    <p class="hero-title">UK Recruitment · Offshore Operations · Business Development</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">"I'm the person in every team who connects the dots between the offshore and onshore world — then builds the system so the gap stops existing."</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-gold">View Experience</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div>
+      <span class="stat-num">4+</span>
+      <span class="stat-label">Years in UK Offshore RPO</span>
+    </div>
+    <div>
+      <span class="stat-num">75+</span>
+      <span class="stat-label">UK Education Placements</span>
+    </div>
+    <div>
+      <span class="stat-num">1,000+</span>
+      <span class="stat-label">Candidates Compliance Processed</span>
+    </div>
+    <div>
+      <span class="stat-num">6</span>
+      <span class="stat-label">Global Markets Covered</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a <strong>UK Recruitment and RPO Operations professional</strong> based in Ahmedabad, India, with 4+ years of experience managing end-to-end offshore recruitment, global compliance operations, and business development across UK Education, Primary Care, and Aviation sectors.</p>
+        <p>My career has been built entirely at the intersection of two worlds — <strong>UK client expectations</strong> and <strong>offshore delivery capability</strong>. I understand both sides deeply, and that's what makes me effective.</p>
+        <p>From building recruitment desks from scratch to processing compliance for candidates across six global regions, I bring operational rigour, commercial awareness, and a genuine focus on quality at every stage of the process.</p>
+        <p>I am multilingual — fluent in <strong>English, Hindi, and Gujarati</strong> — and comfortable working independently in fully remote environments while remaining tightly aligned with onshore teams.</p>
+      </div>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-title">🎯 Current Focus</div>
+          <div class="about-card-text">UK Primary Care Business Development at RPO Arena — generating new GP surgery client relationships and vacancy opportunities for the UK healthcare recruitment division.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">🏆 Recognition</div>
+          <div class="about-card-text">Two-time Champion of the Month at Morgan Hunt (via IMS People Possible) for outstanding delivery performance, client engagement, and pipeline growth.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">🎓 Education</div>
+          <div class="about-card-text">Bachelor of Science in Biotechnology — Ganpat University, Gujarat, India (2018–2021).</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">🌍 Languages</div>
+          <div class="about-card-text">English (Fluent) · Hindi (Fluent) · Gujarati (Native)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-bg">
+  <div class="section-inner">
+    <p class="section-label">Career Journey</p>
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+
+      <div class="exp-item exp-current">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">July 2026 – Present · Current Role</div>
+        <div class="exp-role">Senior Business Development Consultant</div>
+        <div class="exp-company">RPO Arena · Ahmedabad, India</div>
+        <ul class="exp-bullets">
+          <li>Driving outbound BD for the UK Primary Care division — engaging GP surgeries and Primary Care providers across the UK to generate new recruitment opportunities.</li>
+          <li>Generated 401 leads with high-volume targeted outreach, successfully advancing a prospect to agreement signing stage.</li>
+          <li>Building relationships with Practice Managers, GP Partners, and senior hiring decision-makers as the first point of contact for new client acquisition.</li>
+          <li>Collaborating closely with onshore UK recruiters and compliance staff to convert leads into active vacancies.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">June 2025 – June 2026</div>
+        <div class="exp-role">Senior Compliance Officer – Operations & Assurance</div>
+        <div class="exp-company">QX Global Group · Ahmedabad, India</div>
+        <ul class="exp-bullets">
+          <li>Directed end-to-end compliance for candidates across UK, Europe, Middle East, Africa, Asia, and Russia — ensuring multi-jurisdictional regulatory adherence.</li>
+          <li>Managed credentialing, ID issuance, and B2B/B2C contract validation across global client accounts.</li>
+          <li>Enforced data integrity through CRM audits, reducing processing errors and maintaining full audit readiness.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">June 2024 – April 2025</div>
+        <div class="exp-role">Senior Recruiter – UK Operations & Business Development</div>
+        <div class="exp-company">CareMint Recruitment Ltd. · United Kingdom (Remote/Offshore)</div>
+        <ul class="exp-bullets">
+          <li>Built a full offshore UK Education recruitment desk from scratch — sourcing, screening, and placing candidates across schools, nurseries, and sixth form colleges.</li>
+          <li>Led end-to-end candidate compliance including DBS checks, safeguarding, and onboarding.</li>
+          <li>Drove BD efforts engaging 200+ nursery trusts and securing agency placements on PSLs.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">May 2022 – June 2024</div>
+        <div class="exp-role">Associate Consultant / Senior Associate Consultant</div>
+        <div class="exp-company">Morgan Hunt (via IMS People Possible) · United Kingdom (Offshore RPO)</div>
+        <ul class="exp-bullets">
+          <li>Managed offshore recruitment for LSAs specialising in SEN across UK FE and Sixth Form colleges.</li>
+          <li>Served as key offshore point of contact for onshore UK consultants, streamlining fulfilment workflows.</li>
+          <li>Recognised twice as Champion of the Month for outstanding delivery and client engagement.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">What I Bring</p>
+    <h2 class="section-title">Core Skills</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🎯</div>
+        <div class="skill-card-title">UK Recruitment & Talent Delivery</div>
+        <div class="skill-tags">
+          <span class="skill-tag">360° Recruitment</span>
+          <span class="skill-tag">Talent Sourcing</span>
+          <span class="skill-tag">Candidate Screening</span>
+          <span class="skill-tag">Onboarding</span>
+          <span class="skill-tag">DBS & Safeguarding</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📋</div>
+        <div class="skill-card-title">Compliance & Operations</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Multi-Jurisdictional Compliance</span>
+          <span class="skill-tag">Document Verification</span>
+          <span class="skill-tag">Audit Readiness</span>
+          <span class="skill-tag">B2B & B2C Contracts</span>
+          <span class="skill-tag">Data Governance</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📞</div>
+        <div class="skill-card-title">Business Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Outbound BD</span>
+          <span class="skill-tag">GP Surgery Engagement</span>
+          <span class="skill-tag">Lead Generation</span>
+          <span class="skill-tag">PSL Onboarding</span>
+          <span class="skill-tag">Client Acquisition</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">⚙️</div>
+        <div class="skill-card-title">RPO Operations</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Offshore-Onshore Liaison</span>
+          <span class="skill-tag">SLA Management</span>
+          <span class="skill-tag">CRM Systems</span>
+          <span class="skill-tag">Pipeline Management</span>
+          <span class="skill-tag">Process Improvement</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🤝</div>
+        <div class="skill-card-title">Stakeholder Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Client Relationship Mgmt</span>
+          <span class="skill-tag">UK Client Partnering</span>
+          <span class="skill-tag">Decision-Maker Engagement</span>
+          <span class="skill-tag">Negotiation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🌐</div>
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">English — Fluent</span>
+          <span class="skill-tag">Hindi — Fluent</span>
+          <span class="skill-tag">Gujarati — Native</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors" class="sectors-bg">
+  <div class="section-inner">
+    <p class="section-label">Industry Exposure</p>
+    <h2 class="section-title">Sectors I've Worked Across</h2>
+    <div class="section-line"></div>
+    <div class="sectors-grid">
+      <div class="sector-pill"><span>🎓</span>UK Education Recruitment</div>
+      <div class="sector-pill"><span>🏥</span>UK Primary Care & Healthcare</div>
+      <div class="sector-pill"><span>✈️</span>Aviation Compliance</div>
+      <div class="sector-pill"><span>🔄</span>RPO & Offshore Delivery</div>
+      <div class="sector-pill"><span>🏫</span>Special Education Needs (SEN)</div>
+      <div class="sector-pill"><span>🏢</span>Business Process Outsourcing</div>
+      <div class="sector-pill"><span>📊</span>Healthcare Data & Analytics</div>
+      <div class="sector-pill"><span>🌍</span>Global Compliance Operations</div>
+      <div class="sector-pill"><span>💼</span>B2B Business Development</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="section-inner">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value"><a href="mailto:padaipaddy@gmail.com">padaipaddy@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">📱</div>
+        <div class="contact-card-label">Phone</div>
+        <div class="contact-card-value"><a href="tel:+919574821732">+91 95748 21732</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">💼</div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-value"><a href="https://linkedin.com/in/pradippadai-7664951b6" target="_blank">linkedin.com/in/pradippadai</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-label">Location</div>
+        <div class="contact-card-value">Ahmedabad, Gujarat, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Pradip Padai · RPO Operations Specialist · Ahmedabad, India</p>
+</footer>
+
+</body>
+</html>
