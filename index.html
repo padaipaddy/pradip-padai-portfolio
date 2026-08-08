@@ -150,6 +150,52 @@
     from { opacity:0; transform:translateY(20px); }
     to   { opacity:1; transform:translateY(0); }
   }
+ /* BACK TO TOP */
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s, color 0.2s;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+#backToTop.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#backToTop:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+@media (max-width: 600px) {
+  #backToTop {
+    bottom: 1.5rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #backToTop {
+    transition: opacity 0.1s;
+    transform: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -174,13 +220,12 @@
     <div class="hero-content">
       <p class="hero-eyebrow">RPO Operations Specialist · Ahmedabad, India</p>
       <h1 class="hero-name">Pradip Padai</h1>
-      <p class="hero-title">UK Recruitment · Offshore Operations · Business Development</p>
+      <p class="hero-title">Offshore RPO Operations · Business Development</p>
       <div class="hero-divider"></div>
       <p class="hero-tagline">"Because meaningful work changes lives."</p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-gold">📄 Resume</a>
-        <a href="#beyond" class="btn btn-outline">Beyond the Resume</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        <a href="#beyond" class="btn btn-gold">Beyond the Resume</a>
       </div>
     </div>
   </div>
@@ -188,7 +233,7 @@
 
 <div class="stats-strip">
   <div class="stats-grid">
-    <div><span class="stat-num">4+</span><span class="stat-label">Years in UK Offshore RPO</span></div>
+    <div><span class="stat-num">4+</span><span class="stat-label">Years in Offshore RPO</span></div>
     <div><span class="stat-num">75+</span><span class="stat-label">UK Education Placements</span></div>
     <div><span class="stat-num">1,000+</span><span class="stat-label">Candidates Compliance Processed</span></div>
     <div><span class="stat-num">6</span><span class="stat-label">Global Markets Covered</span></div>
@@ -254,7 +299,7 @@
         <ul class="exp-bullets">
           <li>Built a full offshore UK Education recruitment desk from scratch across schools, nurseries, and sixth form colleges.</li>
           <li>Led end-to-end candidate compliance including DBS checks, safeguarding, and onboarding.</li>
-          <li>Drove BD efforts engaging 200+ nursery trusts and securing agency placements on PSLs.</li>
+          <li>Generated 1,500+ leads across Logistics, Transportation, and Education sectors through targeted BD outreach, engaging nursery trusts and securing agency placements on PSLs.</li>
         </ul>
       </div>
 
@@ -401,6 +446,28 @@
 <footer>
   <p>© 2026 Pradip Padai · RPO Operations Specialist · Ahmedabad, India</p>
 </footer>
+ <button id="backToTop" aria-label="Back to top">↑</button>
+ <script>
+  const btn = document.getElementById('backToTop');
+  const hero = document.querySelector('.hero');
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    },
+    { threshold: 0 }
+  );
+
+  observer.observe(hero);
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+ </script>
 
 </body>
 </html>
